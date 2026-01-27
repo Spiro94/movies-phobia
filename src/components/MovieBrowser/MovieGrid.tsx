@@ -1,4 +1,4 @@
-import { Movie } from '../../types/movie';
+import type { Movie } from '../../types/movie';
 import { MovieCard } from './MovieCard';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 

@@ -1,5 +1,5 @@
-import { DangerScores, DangerColor } from '../types/danger';
-import { SceneTag } from '../types/phobia';
+import type { DangerScores, DangerColor } from '../types/danger';
+import type { SceneTag } from '../types/phobia';
 
 /**
  * Calculate danger scores based on scene tags and selected phobias

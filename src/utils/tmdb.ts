@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { TMDBResponse } from '../types/movie';
+import type { TMDBResponse } from '../types/movie';
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;

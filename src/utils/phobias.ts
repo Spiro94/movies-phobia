@@ -1,4 +1,4 @@
-import { Phobia } from '../types/phobia';
+import type { Phobia } from '../types/phobia';
 
 export const PHOBIAS: Phobia[] = [
   // Animal phobias

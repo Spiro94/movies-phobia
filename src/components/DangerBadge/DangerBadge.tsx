@@ -1,4 +1,4 @@
-import { DangerColor } from '../../types/danger';
+import type { DangerColor } from '../../types/danger';
 
 interface DangerBadgeProps {
   score: number;

@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchPopularMovies, searchMovies } from '../utils/tmdb';
-import { TMDBResponse } from '../types/movie';
+import type { TMDBResponse } from '../types/movie';
 
 interface UseMoviesProps {
   searchQuery?: string;

@@ -1,5 +1,5 @@
-import { Movie } from '../../types/movie';
-import { SceneTag } from '../../types/phobia';
+import type { Movie } from '../../types/movie';
+import type { SceneTag } from '../../types/phobia';
 import { usePhobias } from '../../hooks/usePhobias';
 import { useDangerScore } from '../../hooks/useDangerScore';
 import { DangerBadge } from '../DangerBadge/DangerBadge';
