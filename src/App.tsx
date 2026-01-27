@@ -11,13 +11,33 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <div className="app">
-          <header style={{
-            padding: '20px',
-            textAlign: 'center',
-            borderBottom: '1px solid #333',
-          }}>
-            <h1>Movies Phobia</h1>
-            <p>Browse movies safely with personalized danger scores</p>
+          <header
+            style={{
+              backgroundColor: '#1a1a1a',
+              borderBottom: '1px solid #333',
+              padding: '20px',
+              textAlign: 'center',
+            }}
+          >
+            <h1
+              style={{
+                margin: '0 0 8px 0',
+                fontSize: '28px',
+                fontWeight: '700',
+                color: '#fff',
+              }}
+            >
+              Movies Phobia
+            </h1>
+            <p
+              style={{
+                margin: 0,
+                fontSize: '14px',
+                color: '#aaa',
+              }}
+            >
+              Browse movies safely with personalized danger scores
+            </p>
           </header>
           <Routes>
             <Route path="/" element={<MovieBrowser />} />
