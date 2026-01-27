@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { SceneTag } from '../types/phobia';
-import { DangerScores, DangerColor } from '../types/danger';
+import type { SceneTag } from '../types/phobia';
+import type { DangerScores, DangerColor } from '../types/danger';
 import { calculateDangerScores, getDangerColor } from '../utils/dangerScoring';
 
 interface UseDangerScoreProps {
