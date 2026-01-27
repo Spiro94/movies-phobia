@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import type { TMDBResponse } from '../types/movie';
+import type { TMDBResponse, TMDBMovieDetail } from '../types/movie';
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -48,6 +48,18 @@ export async function searchMovies(query: string, page: number = 1): Promise<TMD
     return response.data;
   } catch (error) {
     console.error('Error searching movies:', error);
+    throw error;
+  }
+}
+
+export async function fetchMovieDetail(movieId: string | number): Promise<TMDBMovieDetail> {
+  try {
+    const response = await tmdbClient.get<TMDBMovieDetail>(`/movie/${movieId}`, {
+      params: { append_to_response: 'credits' },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
     throw error;
   }
 }
