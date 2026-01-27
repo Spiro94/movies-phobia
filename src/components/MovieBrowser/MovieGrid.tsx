@@ -5,24 +5,22 @@ import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 interface MovieGridProps {
   movies: Movie[];
   isLoading: boolean;
-  isError: boolean;
   error: Error | null;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
-  onLoadMore: () => void;
+  fetchNextPage: () => void;
 }
 
 export function MovieGrid({
   movies,
   isLoading,
-  isError,
   error,
   hasNextPage,
   isFetchingNextPage,
-  onLoadMore,
+  fetchNextPage,
 }: MovieGridProps) {
   const sentinelRef = useInfiniteScroll({
-    onIntersect: onLoadMore,
+    onIntersect: fetchNextPage,
     enabled: hasNextPage && !isFetchingNextPage,
   });
 
@@ -42,7 +40,7 @@ export function MovieGrid({
     );
   }
 
-  if (isError) {
+  if (error) {
     return (
       <div
         style={{

@@ -2,14 +2,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchPopularMovies, searchMovies } from '../utils/tmdb';
 import type { TMDBResponse } from '../types/movie';
 
-interface UseMoviesProps {
-  searchQuery?: string;
-}
-
-export function useMovies({ searchQuery }: UseMoviesProps = {}) {
+export function useMovies(searchQuery?: string) {
   const isSearch = !!searchQuery && searchQuery.trim().length > 0;
 
-  const query = useInfiniteQuery<TMDBResponse>({
+  return useInfiniteQuery<TMDBResponse>({
     queryKey: isSearch ? ['movies', 'search', searchQuery] : ['movies', 'popular'],
     queryFn: ({ pageParam = 1 }) => {
       if (isSearch) {
@@ -26,16 +22,4 @@ export function useMovies({ searchQuery }: UseMoviesProps = {}) {
     },
     enabled: !isSearch || searchQuery.trim().length > 0,
   });
-
-  const movies = query.data?.pages.flatMap((page) => page.results) ?? [];
-
-  return {
-    movies,
-    isLoading: query.isLoading,
-    isError: query.isError,
-    error: query.error,
-    fetchNextPage: query.fetchNextPage,
-    hasNextPage: query.hasNextPage,
-    isFetchingNextPage: query.isFetchingNextPage,
-  };
 }
