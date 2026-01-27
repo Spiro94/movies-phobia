@@ -15,11 +15,10 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
   // TODO: Replace with useSceneTags(movie.id.toString()).tags when Plan 01-03b is complete
   const tags: never[] = [];
 
-  const { scores, getColor } = useDangerScore(tags);
+  const { scores, getColor } = useDangerScore({ tags, selectedPhobias });
 
   // Calculate overall danger score (highest among selected phobias)
-  const phobiaScores = selectedPhobias.map(id => scores[id] || 0);
-  const maxScore = phobiaScores.length > 0 ? Math.max(...phobiaScores) : 0;
+  const maxScore = scores.overall;
   const overallColor = getColor(maxScore);
 
   // Format release date
@@ -130,6 +129,7 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
               }}>
                 {selectedPhobias.map(phobiaId => {
                   const phobia = getPhobiaById(phobiaId);
+                  const score = scores.byPhobia[phobiaId] || 0;
                   return (
                     <div
                       key={phobiaId}
@@ -144,8 +144,9 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
                     >
                       <span>{phobia?.name || phobiaId}</span>
                       <DangerBadge
-                        phobiaId={phobiaId}
-                        score={scores[phobiaId] || 0}
+                        score={score}
+                        color={getColor(score)}
+                        label=""
                       />
                     </div>
                   );
