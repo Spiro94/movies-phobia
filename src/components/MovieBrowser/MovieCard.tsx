@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { Movie } from '../../types/movie';
 import type { SceneTag } from '../../types/phobia';
 import { usePhobias } from '../../hooks/usePhobias';
@@ -25,7 +26,8 @@ export function MovieCard({ movie }: MovieCardProps) {
   const hasNoPhobias = selectedPhobias.length === 0;
 
   return (
-    <div
+    <Link
+      to={`/movie/${movie.id}`}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -34,6 +36,8 @@ export function MovieCard({ movie }: MovieCardProps) {
         backgroundColor: '#1a1a1a',
         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
         transition: 'transform 0.2s',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-4px)';
@@ -111,6 +115,6 @@ export function MovieCard({ movie }: MovieCardProps) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
