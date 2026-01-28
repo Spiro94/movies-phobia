@@ -39,6 +39,45 @@ export function calculateDangerScores(
 }
 
 /**
+ * Calculate average intensity for a set of tags, weighted by user count
+ * @param tags - Array of scene tags with intensity and count
+ * @returns Average intensity (0-10) weighted by number of users per tag
+ */
+export function calculateAverageIntensity(tags: SceneTag[]): number {
+  if (tags.length === 0) return 0;
+
+  let totalIntensity = 0;
+  let totalUsers = 0;
+
+  tags.forEach(tag => {
+    totalIntensity += tag.intensity * tag.count;
+    totalUsers += tag.count;
+  });
+
+  return totalUsers > 0 ? totalIntensity / totalUsers : 0;
+}
+
+/**
+ * Calculate average intensity per phobia for selected phobias
+ * @param tags - Array of scene tags
+ * @param selectedPhobias - Array of selected phobia IDs
+ * @returns Record mapping phobia ID to average intensity
+ */
+export function calculateAverageIntensityByPhobia(
+  tags: SceneTag[],
+  selectedPhobias: string[]
+): Record<string, number> {
+  const byPhobia: Record<string, number> = {};
+
+  selectedPhobias.forEach(phobiaId => {
+    const phobiaTags = tags.filter(tag => tag.phobiaId === phobiaId);
+    byPhobia[phobiaId] = calculateAverageIntensity(phobiaTags);
+  });
+
+  return byPhobia;
+}
+
+/**
  * Get danger color based on score
  * @param score - Danger score from 0-100
  * @returns Hex color code
