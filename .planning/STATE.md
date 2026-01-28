@@ -50,6 +50,7 @@ Phase 4: Polish & Launch               ░░░░░░░░░░░░ 0%
 | Weighted average for community consensus | Accounts for multiple users per tag (3 users at 8 + 1 user at 2 = avg 6.5) | 2026-01-28 |
 | Full-width layout for movie detail pages | Removed 1200px maxWidth constraint; content uses full viewport width | 2026-01-28 |
 | Top-center dialog positioning pattern | Modals use items-start + pt-20 instead of pure center (better UX) | 2026-01-28 |
+| Body without flex centering | Removed Vite's display: flex + place-items: center; root constraint prevented full-width | 2026-01-28 |
 | Model Profile | Budget (Sonnet for writing, Haiku for research/verification) | 2026-01-26 |
 | Workflow Configuration | Research, Plan Checker, and Execution Verifier all enabled | 2026-01-26 |
 
@@ -67,6 +68,7 @@ None yet.
 |---|-------------|------|--------|-----------|
 | 001 | Fix layout shrinkage, danger score calculation, and real-time updates | 2026-01-28 | [0ec4cfb](https://github.com/villamizar/movies-phobia/commit/0ec4cfb) | [001-fix-layout-danger-score-bugs](./quick/001-fix-layout-danger-score-bugs/) |
 | 002 | Fix movie detail layout width and dialog positioning | 2026-01-28 | [8130c45](https://github.com/villamizar/movies-phobia/commit/8130c45), [551c4bf](https://github.com/villamizar/movies-phobia/commit/551c4bf) | [002-fix-movie-detail-layout-and-dialog-posit](./quick/002-fix-movie-detail-layout-and-dialog-posit/) |
+| 003 | Fix root body flexbox centering for true full-width layout | 2026-01-28 | [8a68f40](https://github.com/villamizar/movies-phobia/commit/8a68f40) | [003-fix-full-width-layout-and-modal-stacking](./quick/003-fix-full-width-layout-and-modal-stacking/) |
 
 ---
 
@@ -79,11 +81,11 @@ None yet.
 
 ## Session Continuity
 
-- **Last session:** 2026-01-28 15:20 — Completed Quick Task #002
-- **Current activity:** 2026-01-28 — Quick task #002: Fixed movie detail layout and dialog positioning
+- **Last session:** 2026-01-28 15:30 — Completed Quick Task #003
+- **Current activity:** 2026-01-28 — Quick task #003: Fixed root body flexbox centering for full-width layout
 - **Next action:** Begin Phase 2 (Authentication & Profiles) planning
 - **Resume file:** None
 
 ---
 
-*Last updated: 2026-01-28 15:20*
+*Last updated: 2026-01-28 15:30*
