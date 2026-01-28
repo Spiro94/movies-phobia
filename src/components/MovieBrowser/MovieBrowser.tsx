@@ -16,6 +16,7 @@ export function MovieBrowser() {
     isFetchingNextPage,
     isLoading,
     error,
+    refetch,
   } = useMovies(debouncedQuery || undefined);
 
   const movies = data?.pages.flatMap((page) => page.results) ?? [];
@@ -95,6 +96,7 @@ export function MovieBrowser() {
             hasNextPage={hasNextPage ?? false}
             isFetchingNextPage={isFetchingNextPage}
             fetchNextPage={fetchNextPage}
+            refetch={refetch}
           />
 
           {/* Empty state */}
