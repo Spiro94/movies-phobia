@@ -7,7 +7,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import type { SceneTag } from '../../types/phobia';
 import { formatTimestamp } from '../../utils/timeFormatting';
-import { getDangerColor } from '../../utils/dangerScoring';
+import { getDangerColor, calculateAverageIntensity } from '../../utils/dangerScoring';
 import { getPhobiaById } from '../../utils/phobias';
 
 interface SceneTimelineProps {
@@ -24,12 +24,13 @@ interface AggregatedTag {
   timestamp: number; // bucket timestamp (30-second window)
   phobias: PhobiaInfo[];
   maxIntensity: number;
+  averageIntensity: number; // weighted average across all tags in window
 }
 
 export function SceneTimeline({ tags }: SceneTimelineProps) {
   // Aggregate tags into 30-second windows
   const aggregated = useMemo(() => {
-    const grouped: Record<number, AggregatedTag> = {};
+    const grouped: Record<number, AggregatedTag & { tagsInWindow: SceneTag[] }> = {};
 
     tags.forEach(tag => {
       const bucket = Math.round(tag.timestamp / 30) * 30; // 30-second window
@@ -38,8 +39,13 @@ export function SceneTimeline({ tags }: SceneTimelineProps) {
           timestamp: bucket,
           phobias: [],
           maxIntensity: 0,
+          averageIntensity: 0,
+          tagsInWindow: [], // Track tags for averaging
         };
       }
+
+      // Track tag for average calculation
+      grouped[bucket].tagsInWindow.push(tag);
 
       const phobia = grouped[bucket].phobias.find(p => p.id === tag.phobiaId);
       if (phobia) {
@@ -55,7 +61,16 @@ export function SceneTimeline({ tags }: SceneTimelineProps) {
       grouped[bucket].maxIntensity = Math.max(grouped[bucket].maxIntensity, tag.intensity);
     });
 
-    return Object.values(grouped).sort((a, b) => a.timestamp - b.timestamp);
+    // Calculate average intensity for each window
+    const result = Object.values(grouped).map(window => {
+      const { tagsInWindow, ...rest } = window;
+      return {
+        ...rest,
+        averageIntensity: calculateAverageIntensity(tagsInWindow),
+      };
+    });
+
+    return result.sort((a, b) => a.timestamp - b.timestamp);
   }, [tags]);
 
   if (aggregated.length === 0) {
@@ -89,6 +104,13 @@ export function SceneTimeline({ tags }: SceneTimelineProps) {
                 fontSize: '1rem',
               }}>
                 {formatTimestamp(item.timestamp)}
+              </div>
+              <div style={{
+                fontSize: '0.85rem',
+                opacity: 0.7,
+                marginBottom: '8px',
+              }}>
+                Max: {item.maxIntensity}/10 • Avg: {item.averageIntensity.toFixed(1)}/10
               </div>
               {item.phobias.map(p => (
                 <div
