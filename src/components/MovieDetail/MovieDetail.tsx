@@ -14,83 +14,79 @@ export function MovieDetail() {
     window.scrollTo(0, 0);
   }, [id]);
 
-  if (isLoading) {
-    return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '400px',
-        fontSize: '1.2rem',
-      }}>
-        Loading movie details...
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '400px',
-        gap: '20px',
-      }}>
-        <div style={{
-          fontSize: '1.2rem',
-          color: '#f44336',
-        }}>
-          Error loading movie: {(error as Error).message}
-        </div>
-        <Link
-          to="/"
-          style={{
-            padding: '10px 20px',
-            background: '#1976d2',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '4px',
-          }}
-        >
-          Back to Browse
-        </Link>
-      </div>
-    );
-  }
-
-  if (!movie) {
-    return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '400px',
-        gap: '20px',
-      }}>
-        <div style={{ fontSize: '1.2rem' }}>
-          Movie not found
-        </div>
-        <Link
-          to="/"
-          style={{
-            padding: '10px 20px',
-            background: '#1976d2',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '4px',
-          }}
-        >
-          Back to Browse
-        </Link>
-      </div>
-    );
-  }
-
   return (
     <div className="movie-detail">
+      {isLoading && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          fontSize: '1.2rem',
+        }}>
+          Loading movie details...
+        </div>
+      )}
+
+      {error && (
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          gap: '20px',
+        }}>
+          <div style={{
+            fontSize: '1.2rem',
+            color: '#f44336',
+          }}>
+            Error loading movie: {(error as Error).message}
+          </div>
+          <Link
+            to="/"
+            style={{
+              padding: '10px 20px',
+              background: '#1976d2',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+            }}
+          >
+            Back to Browse
+          </Link>
+        </div>
+      )}
+
+      {!movie && !isLoading && !error && (
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          gap: '20px',
+        }}>
+          <div style={{ fontSize: '1.2rem' }}>
+            Movie not found
+          </div>
+          <Link
+            to="/"
+            style={{
+              padding: '10px 20px',
+              background: '#1976d2',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+            }}
+          >
+            Back to Browse
+          </Link>
+        </div>
+      )}
+
+      {movie && (
+        <>
       {/* Back Button */}
       <div style={{
         padding: '20px 40px',
@@ -235,6 +231,8 @@ export function MovieDetail() {
         isOpen={isTagModalOpen}
         onClose={() => setIsTagModalOpen(false)}
       />
+      </>
+      )}
     </div>
   );
 }
