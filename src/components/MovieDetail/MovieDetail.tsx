@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useMovieDetail } from '../../hooks/useMovieDetail';
 import { MovieDetailHeader } from './MovieDetailHeader';
+import { SceneTagModal } from '../SceneTagModal/SceneTagModal';
 
 export function MovieDetail() {
   const { id } = useParams<{ id: string }>();
   const { data: movie, isLoading, error } = useMovieDetail(id);
+  const [isTagModalOpen, setIsTagModalOpen] = useState(false);
 
   // Scroll to top when movie changes
   useEffect(() => {
@@ -153,7 +155,7 @@ export function MovieDetail() {
 
         {/* Cast */}
         {movie.credits?.cast && movie.credits.cast.length > 0 && (
-          <section>
+          <section style={{ marginBottom: '40px' }}>
             <h2 style={{
               fontSize: '1.8rem',
               marginBottom: '15px',
@@ -198,8 +200,41 @@ export function MovieDetail() {
           </section>
         )}
 
-        {/* Placeholder for Tag Scenes button (will be added in Plan 01-03b) */}
+        {/* Tag Scenes Button */}
+        <section style={{ marginBottom: '40px', textAlign: 'center' }}>
+          <button
+            onClick={() => setIsTagModalOpen(true)}
+            className="tag-button"
+            style={{
+              padding: '15px 40px',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              background: '#1976d2',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(25, 118, 210, 0.3)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#1565c0';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#1976d2';
+            }}
+          >
+            Tag Scenes
+          </button>
+        </section>
       </div>
+
+      {/* Scene Tag Modal */}
+      <SceneTagModal
+        movieId={id!}
+        movieRuntime={movie.runtime}
+        isOpen={isTagModalOpen}
+        onClose={() => setIsTagModalOpen(false)}
+      />
     </div>
   );
 }
