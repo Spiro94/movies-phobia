@@ -7,7 +7,8 @@ export interface Phobia {
 
 export interface SceneTag {
   phobiaId: string;
-  intensity: number; // 0-100
-  timestamp?: string; // Optional time marker in movie
-  description?: string;
+  intensity: number; // 1-10 scale for user input
+  timestamp: number; // Timestamp in seconds
+  notes?: string; // Optional notes about the scene
+  count: number; // Number of users who tagged this scene
 }
