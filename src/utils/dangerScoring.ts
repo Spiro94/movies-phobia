@@ -23,7 +23,7 @@ export function calculateDangerScores(
     if (selectedPhobias.includes(tag.phobiaId)) {
       byPhobia[tag.phobiaId] = Math.max(
         byPhobia[tag.phobiaId] || 0,
-        tag.intensity
+        tag.intensity * 10  // Convert 1-10 scale to 0-100
       );
     }
   });

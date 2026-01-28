@@ -93,8 +93,8 @@ describe('calculateDangerScores (existing tests for max)', () => {
     const result = calculateDangerScores(tags, ['arachnophobia']);
 
     // Average would be (3×5 + 9×1)/(5+1) = 24/6 = 4
-    // But danger score should use max = 9
-    expect(result.byPhobia.arachnophobia).toBe(9);
-    expect(result.overall).toBe(9);
+    // But danger score should use max = 9, converted to 0-100 scale = 90
+    expect(result.byPhobia.arachnophobia).toBe(90);
+    expect(result.overall).toBe(90);
   });
 });
