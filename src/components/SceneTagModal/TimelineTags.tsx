@@ -3,6 +3,7 @@ import type { SceneTag } from '../../types/phobia';
 import { SceneTimeline } from '../Timeline/SceneTimeline';
 import { formatTimestamp } from '../../utils/timeFormatting';
 import { getPhobiaById } from '../../utils/phobias';
+import { calculateAverageIntensity } from '../../utils/dangerScoring';
 
 interface TimelineTagsProps {
   tags: SceneTag[];
@@ -11,6 +12,12 @@ interface TimelineTagsProps {
 
 export function TimelineTags({ tags, onRemoveTag }: TimelineTagsProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Calculate overall statistics
+  const maxIntensity = tags.length > 0
+    ? Math.max(...tags.map(t => t.intensity))
+    : 0;
+  const averageIntensity = calculateAverageIntensity(tags);
 
   if (tags.length === 0) {
     return (
@@ -44,6 +51,39 @@ export function TimelineTags({ tags, onRemoveTag }: TimelineTagsProps) {
         }}>
           Timeline Overview
         </h3>
+
+        {/* Overall Intensity Statistics */}
+        <div style={{
+          padding: '15px',
+          background: 'rgba(255, 255, 255, 0.05)',
+          borderRadius: '4px',
+          marginBottom: '15px',
+          display: 'flex',
+          gap: '20px',
+          justifyContent: 'center',
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '5px' }}>
+              Maximum Intensity
+            </div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+              {maxIntensity}/10
+            </div>
+          </div>
+          <div style={{
+            width: '1px',
+            background: 'rgba(255, 255, 255, 0.2)'
+          }} />
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '5px' }}>
+              Average Intensity
+            </div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+              {averageIntensity.toFixed(1)}/10
+            </div>
+          </div>
+        </div>
+
         <SceneTimeline tags={tags} />
       </section>
 
