@@ -119,7 +119,7 @@ export function MovieDetail() {
       </div>
 
       {/* Header with backdrop and danger scores */}
-      <MovieDetailHeader movie={movie} />
+      <MovieDetailHeader key={movie.id} movie={movie} />
 
       {/* Content Section */}
       <div
