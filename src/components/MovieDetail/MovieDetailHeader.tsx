@@ -1,6 +1,7 @@
 import type { TMDBMovieDetail } from '../../types/movie';
 import { usePhobias } from '../../hooks/usePhobias';
 import { useDangerScore } from '../../hooks/useDangerScore';
+import { useSceneTags } from '../../hooks/useSceneTags';
 import { DangerBadge } from '../DangerBadge/DangerBadge';
 import { formatRuntime } from '../../utils/timeFormatting';
 import { getPhobiaById } from '../../utils/phobias';
@@ -11,10 +12,7 @@ interface MovieDetailHeaderProps {
 
 export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
   const { selectedPhobias } = usePhobias();
-
-  // TODO: Replace with useSceneTags(movie.id.toString()).tags when Plan 01-03b is complete
-  const tags: never[] = [];
-
+  const { tags } = useSceneTags(movie.id.toString());
   const { scores, getColor } = useDangerScore({ tags, selectedPhobias });
 
   // Calculate overall danger score (highest among selected phobias)

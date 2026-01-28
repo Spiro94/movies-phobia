@@ -1,21 +1,19 @@
 import { Link } from 'react-router-dom';
 import type { Movie } from '../../types/movie';
-import type { SceneTag } from '../../types/phobia';
 import { usePhobias } from '../../hooks/usePhobias';
 import { useDangerScore } from '../../hooks/useDangerScore';
+import { useSceneTags } from '../../hooks/useSceneTags';
 import { DangerBadge } from '../DangerBadge/DangerBadge';
 
 interface MovieCardProps {
   movie: Movie;
 }
 
-// TODO: Replace with actual scene tags from API/database
-const mockTags: SceneTag[] = [];
-
 export function MovieCard({ movie }: MovieCardProps) {
   const { selectedPhobias } = usePhobias();
+  const { tags } = useSceneTags(movie.id.toString());
   const { scores, getColor } = useDangerScore({
-    tags: mockTags,
+    tags,
     selectedPhobias,
   });
 
