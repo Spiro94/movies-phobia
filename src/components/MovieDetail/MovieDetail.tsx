@@ -90,8 +90,6 @@ export function MovieDetail() {
       {/* Back Button */}
       <div style={{
         padding: '20px 40px',
-        maxWidth: '1200px',
-        margin: '0 auto',
       }}>
         <Link
           to="/"
@@ -125,8 +123,6 @@ export function MovieDetail() {
       <div
         className="movie-content"
         style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
           padding: '40px',
         }}
       >
