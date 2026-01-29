@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useMovies } from '../../hooks/useMovies';
 import { useDebounce } from '../../hooks/useDebounce';
+import { usePhobias } from '../../hooks/usePhobias';
+import { loadSceneTags } from '../../utils/storage';
 import { MovieGrid } from './MovieGrid';
 import { PhobiaModal } from '../PhobiaModal/PhobiaModal';
 import { PhobiaSidebar } from '../Sidebar/PhobiaSidebar';
@@ -8,6 +10,7 @@ import { PhobiaSidebar } from '../Sidebar/PhobiaSidebar';
 export function MovieBrowser() {
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 500);
+  const { selectedPhobias } = usePhobias();
 
   const {
     data,
@@ -20,6 +23,18 @@ export function MovieBrowser() {
   } = useMovies(debouncedQuery || undefined);
 
   const movies = data?.pages.flatMap((page) => page.results) ?? [];
+
+  // Filter movies by selected phobias
+  const filteredMovies = useMemo(() => {
+    if (selectedPhobias.length === 0) return movies;
+
+    return movies.filter((movie) => {
+      const movieTags = loadSceneTags(movie.id.toString());
+      return movieTags.some((tag) =>
+        selectedPhobias.includes(tag.phobiaId)
+      );
+    });
+  }, [movies, selectedPhobias]);
 
   return (
     <>
@@ -90,7 +105,7 @@ export function MovieBrowser() {
 
           {/* Movie grid */}
           <MovieGrid
-            movies={movies}
+            movies={filteredMovies}
             isLoading={isLoading}
             error={error}
             hasNextPage={hasNextPage ?? false}
