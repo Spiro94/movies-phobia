@@ -51,10 +51,8 @@ Phase 4: Polish & Launch               ░░░░░░░░░░░░ 0%
 | Full-width layout for movie detail pages | Removed 1200px maxWidth constraint; content uses full viewport width | 2026-01-28 |
 | Top-center dialog positioning pattern | Modals use items-start + pt-20 instead of pure center (better UX) | 2026-01-28 |
 | Body without flex centering | Removed Vite's display: flex + place-items: center; root constraint prevented full-width | 2026-01-28 |
-| Tailwind CSS utility-first approach | Migrated from inline styles; custom colors (danger-*, app-*) via CSS @theme | 2026-01-29 |
+| Tailwind CSS utility-first approach | Migrated from inline styles; custom colors (danger-*, app-*) in tailwind.config.js | 2026-01-29 |
 | Keep dynamic inline styles minimal | Only 5 inline styles remain for runtime-computed values (backgroundColor, backgroundImage) | 2026-01-29 |
-| @theme directive for custom colors | Tailwind 4 CSS-based theming; generates utilities from CSS variables | 2026-01-29 |
-| Remove theme.extend.colors from config | Tailwind 4+ uses CSS-based theming; config colors are legacy | 2026-01-29 |
 | Model Profile | Budget (Sonnet for writing, Haiku for research/verification) | 2026-01-26 |
 | Workflow Configuration | Research, Plan Checker, and Execution Verifier all enabled | 2026-01-26 |
 
@@ -74,7 +72,6 @@ None yet.
 | 002 | Fix movie detail layout width and dialog positioning | 2026-01-28 | [8130c45](https://github.com/villamizar/movies-phobia/commit/8130c45), [551c4bf](https://github.com/villamizar/movies-phobia/commit/551c4bf) | [002-fix-movie-detail-layout-and-dialog-posit](./quick/002-fix-movie-detail-layout-and-dialog-posit/) |
 | 003 | Fix root body flexbox centering for true full-width layout | 2026-01-28 | [8a68f40](https://github.com/villamizar/movies-phobia/commit/8a68f40) | [003-fix-full-width-layout-and-modal-stacking](./quick/003-fix-full-width-layout-and-modal-stacking/) |
 | 006 | Migrate to Tailwind CSS from inline styles | 2026-01-29 | [6ebe837](https://github.com/villamizar/movies-phobia/commit/6ebe837), [3ec274b](https://github.com/villamizar/movies-phobia/commit/3ec274b), [8bd048b](https://github.com/villamizar/movies-phobia/commit/8bd048b) | [006-migrate-to-tailwind-css](./quick/006-migrate-to-tailwind-css/) |
-| 007 | Fix Tailwind 4 config - migrate to CSS-based theme | 2026-01-29 | [a9fbc84](https://github.com/villamizar/movies-phobia/commit/a9fbc84) | [007-fix-tailwind-4-config](./quick/007-fix-tailwind-4-config/) |
 
 ---
 
@@ -87,11 +84,11 @@ None yet.
 
 ## Session Continuity
 
-- **Last session:** 2026-01-29 19:59 — Completed Quick Task #007
-- **Current activity:** 2026-01-29 — Quick task #007: Fixed Tailwind 4 config with CSS-based theme
+- **Last session:** 2026-01-29 19:50 — Completed Quick Task #006
+- **Current activity:** 2026-01-29 — Quick task #006: Migrated to Tailwind CSS from inline styles
 - **Next action:** Begin Phase 2 (Authentication & Profiles) planning
 - **Resume file:** None
 
 ---
 
-*Last updated: 2026-01-29 19:59*
+*Last updated: 2026-01-29 19:50*
