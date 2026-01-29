@@ -1,5 +1,5 @@
 import type { TMDBMovieDetail } from '../../types/movie';
-import { usePhobias } from '../../hooks/usePhobias';
+import { usePhobiaContext } from '../../contexts/PhobiaContext';
 import { useDangerScore } from '../../hooks/useDangerScore';
 import { useSceneTags } from '../../hooks/useSceneTags';
 import { DangerBadge } from '../DangerBadge/DangerBadge';
@@ -11,7 +11,7 @@ interface MovieDetailHeaderProps {
 }
 
 export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
-  const { selectedPhobias } = usePhobias();
+  const { selectedPhobias } = usePhobiaContext();
   const { tags } = useSceneTags(movie.id.toString());
   const { scores, getColor } = useDangerScore({ tags, selectedPhobias });
 

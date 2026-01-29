@@ -1,10 +1,10 @@
 import { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { usePhobias } from '../../hooks/usePhobias';
+import { usePhobiaContext } from '../../contexts/PhobiaContext';
 import { PhobiaSelector } from './PhobiaSelector';
 
 export function PhobiaModal() {
-  const { selectedPhobias, setPhobias, isLoaded } = usePhobias();
+  const { selectedPhobias, setPhobias, isLoaded } = usePhobiaContext();
   const [isOpen, setIsOpen] = useState(false);
   const [tempSelections, setTempSelections] = useState<string[]>([]);
   const [showSkipWarning, setShowSkipWarning] = useState(false);

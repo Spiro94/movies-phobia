@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useMovies } from '../../hooks/useMovies';
 import { useDebounce } from '../../hooks/useDebounce';
-import { usePhobias } from '../../hooks/usePhobias';
+import { usePhobiaContext } from '../../contexts/PhobiaContext';
 import { loadSceneTags } from '../../utils/storage';
 import { MovieGrid } from './MovieGrid';
 import { PhobiaModal } from '../PhobiaModal/PhobiaModal';
@@ -10,7 +10,7 @@ import { PhobiaSidebar } from '../Sidebar/PhobiaSidebar';
 export function MovieBrowser() {
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 500);
-  const { selectedPhobias } = usePhobias();
+  const { selectedPhobias } = usePhobiaContext();
 
   const {
     data,

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { usePhobias } from '../../hooks/usePhobias';
+import { usePhobiaContext } from '../../contexts/PhobiaContext';
 import { PhobiaSelector } from '../PhobiaModal/PhobiaSelector';
 
 export function PhobiaSidebar() {
-  const { selectedPhobias, togglePhobia, setPhobias } = usePhobias();
+  const { selectedPhobias, togglePhobia, setPhobias } = usePhobiaContext();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleClear = () => {

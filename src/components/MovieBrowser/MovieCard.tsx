@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Movie } from '../../types/movie';
-import { usePhobias } from '../../hooks/usePhobias';
+import { usePhobiaContext } from '../../contexts/PhobiaContext';
 import { useDangerScore } from '../../hooks/useDangerScore';
 import { useSceneTags } from '../../hooks/useSceneTags';
 import { DangerBadge } from '../DangerBadge/DangerBadge';
@@ -10,7 +10,7 @@ interface MovieCardProps {
 }
 
 export function MovieCard({ movie }: MovieCardProps) {
-  const { selectedPhobias } = usePhobias();
+  const { selectedPhobias } = usePhobiaContext();
   const { tags } = useSceneTags(movie.id.toString());
   const { scores, getColor } = useDangerScore({
     tags,
