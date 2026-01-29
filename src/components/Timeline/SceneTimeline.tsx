@@ -92,34 +92,17 @@ export function SceneTimeline({ tags }: SceneTimelineProps) {
             {index < aggregated.length - 1 && <TimelineConnector />}
           </TimelineSeparator>
           <TimelineContent>
-            <div style={{
-              padding: '10px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              borderRadius: '4px',
-              marginBottom: '10px',
-            }}>
-              <div style={{
-                fontWeight: 'bold',
-                marginBottom: '8px',
-                fontSize: '1rem',
-              }}>
+            <div className="p-2.5 bg-white/5 rounded mb-2.5">
+              <div className="font-bold mb-2 text-base">
                 {formatTimestamp(item.timestamp)}
               </div>
-              <div style={{
-                fontSize: '0.85rem',
-                opacity: 0.7,
-                marginBottom: '8px',
-              }}>
+              <div className="text-[0.85rem] opacity-70 mb-2">
                 Max: {item.maxIntensity}/10 • Avg: {item.averageIntensity.toFixed(1)}/10
               </div>
               {item.phobias.map(p => (
                 <div
                   key={p.id}
-                  style={{
-                    fontSize: '0.9rem',
-                    opacity: 0.9,
-                    marginBottom: '4px',
-                  }}
+                  className="text-sm opacity-90 mb-1"
                 >
                   {p.name} ({p.count} user{p.count > 1 ? 's' : ''})
                 </div>

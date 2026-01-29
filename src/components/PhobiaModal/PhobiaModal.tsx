@@ -79,39 +79,16 @@ export function PhobiaModal() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel
-                style={{
-                  backgroundColor: '#1a1a1a',
-                  borderRadius: '12px',
-                  padding: '32px',
-                  maxWidth: '800px',
-                  width: '100%',
-                  maxHeight: '90vh',
-                  overflow: 'auto',
-                  border: '1px solid #333',
-                }}
-              >
+              <Dialog.Panel className="bg-app-card rounded-xl p-8 max-w-[800px] w-full max-h-[90vh] overflow-auto border border-app-border">
                 {!showSkipWarning ? (
                   <>
                     <Dialog.Title
                       as="h2"
-                      style={{
-                        fontSize: '24px',
-                        fontWeight: '700',
-                        marginBottom: '12px',
-                        color: '#fff',
-                      }}
+                      className="text-2xl font-bold mb-3 text-white"
                     >
                       Select Your Phobias
                     </Dialog.Title>
-                    <Dialog.Description
-                      style={{
-                        fontSize: '14px',
-                        color: '#aaa',
-                        marginBottom: '24px',
-                        lineHeight: '1.5',
-                      }}
-                    >
+                    <Dialog.Description className="text-sm text-gray-400 mb-6 leading-normal">
                       Choose the phobias that affect you to receive personalized
                       danger scores for movies. This helps you identify potentially
                       triggering content before watching.
@@ -123,35 +100,10 @@ export function PhobiaModal() {
                       onClear={handleClear}
                     />
 
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginTop: '32px',
-                        gap: '16px',
-                      }}
-                    >
+                    <div className="flex justify-between items-center mt-8 gap-4">
                       <button
                         onClick={handleSkip}
-                        style={{
-                          padding: '10px 20px',
-                          fontSize: '14px',
-                          backgroundColor: 'transparent',
-                          color: '#888',
-                          border: '1px solid #444',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#2a2a2a';
-                          e.currentTarget.style.borderColor = '#666';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.borderColor = '#444';
-                        }}
+                        className="px-5 py-2.5 text-sm bg-transparent text-gray-500 border border-[#444] rounded-md cursor-pointer transition-all hover:bg-[#2a2a2a] hover:border-[#666]"
                       >
                         Skip for now
                       </button>
@@ -159,29 +111,11 @@ export function PhobiaModal() {
                       <button
                         onClick={handleConfirm}
                         disabled={tempSelections.length === 0}
-                        style={{
-                          padding: '10px 24px',
-                          fontSize: '14px',
-                          backgroundColor:
-                            tempSelections.length > 0 ? '#646cff' : '#333',
-                          color: tempSelections.length > 0 ? '#fff' : '#666',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor:
-                            tempSelections.length > 0 ? 'pointer' : 'not-allowed',
-                          fontWeight: '600',
-                          transition: 'all 0.2s',
-                        }}
-                        onMouseEnter={(e) => {
-                          if (tempSelections.length > 0) {
-                            e.currentTarget.style.backgroundColor = '#535bf2';
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (tempSelections.length > 0) {
-                            e.currentTarget.style.backgroundColor = '#646cff';
-                          }
-                        }}
+                        className={`px-6 py-2.5 text-sm border-none rounded-md font-semibold transition-all ${
+                          tempSelections.length > 0
+                            ? 'bg-[#646cff] text-white cursor-pointer hover:bg-[#535bf2]'
+                            : 'bg-[#333] text-[#666] cursor-not-allowed'
+                        }`}
                       >
                         Confirm Selection
                         {tempSelections.length > 0 &&
@@ -193,25 +127,13 @@ export function PhobiaModal() {
                   <>
                     <Dialog.Title
                       as="h2"
-                      style={{
-                        fontSize: '24px',
-                        fontWeight: '700',
-                        marginBottom: '12px',
-                        color: '#ff9800',
-                      }}
+                      className="text-2xl font-bold mb-3 text-danger-yellow"
                     >
                       Skip Phobia Selection?
                     </Dialog.Title>
-                    <Dialog.Description
-                      style={{
-                        fontSize: '14px',
-                        color: '#aaa',
-                        marginBottom: '24px',
-                        lineHeight: '1.6',
-                      }}
-                    >
-                      <p style={{ marginBottom: '12px' }}>
-                        <strong style={{ color: '#fff' }}>
+                    <Dialog.Description className="text-sm text-gray-400 mb-6 leading-relaxed">
+                      <p className="mb-3">
+                        <strong className="text-white">
                           You won't see personalized danger scores.
                         </strong>
                       </p>
@@ -222,55 +144,17 @@ export function PhobiaModal() {
                       </p>
                     </Dialog.Description>
 
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        gap: '12px',
-                        marginTop: '24px',
-                      }}
-                    >
+                    <div className="flex justify-end gap-3 mt-6">
                       <button
                         onClick={cancelSkip}
-                        style={{
-                          padding: '10px 20px',
-                          fontSize: '14px',
-                          backgroundColor: 'transparent',
-                          color: '#fff',
-                          border: '1px solid #666',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#2a2a2a';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }}
+                        className="px-5 py-2.5 text-sm bg-transparent text-white border border-[#666] rounded-md cursor-pointer transition-all hover:bg-[#2a2a2a]"
                       >
                         Go Back
                       </button>
 
                       <button
                         onClick={confirmSkip}
-                        style={{
-                          padding: '10px 24px',
-                          fontSize: '14px',
-                          backgroundColor: '#ff9800',
-                          color: '#000',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          fontWeight: '600',
-                          transition: 'all 0.2s',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#f57c00';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#ff9800';
-                        }}
+                        className="px-6 py-2.5 text-sm bg-danger-yellow text-black border-none rounded-md cursor-pointer font-semibold transition-all hover:bg-[#f57c00]"
                       >
                         Skip Anyway
                       </button>
