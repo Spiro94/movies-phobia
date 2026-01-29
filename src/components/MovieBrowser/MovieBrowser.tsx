@@ -24,24 +24,63 @@ export function MovieBrowser() {
   return (
     <>
       <PhobiaModal />
-      <div className="flex min-h-screen bg-app-bg">
+      <div
+        style={{
+          display: 'flex',
+          minHeight: '100vh',
+          backgroundColor: '#0a0a0a',
+        }}
+      >
         <PhobiaSidebar />
 
-        <main className="flex-1 p-5 min-w-0">
+        <main
+          style={{
+            flex: 1,
+            padding: '20px',
+            minWidth: 0,
+          }}
+        >
           {/* Search input */}
-          <div className="max-w-[1400px] mx-auto mb-8">
+          <div
+            style={{
+              maxWidth: '1400px',
+              margin: '0 auto 30px',
+            }}
+          >
             <input
               type="text"
               placeholder="Search movies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-5 py-3.5 text-base bg-app-card border border-app-border rounded-lg text-white outline-none transition-colors focus:border-[#646cff]"
+              style={{
+                width: '100%',
+                padding: '14px 20px',
+                fontSize: '16px',
+                backgroundColor: '#1a1a1a',
+                border: '1px solid #333',
+                borderRadius: '8px',
+                color: '#fff',
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = '#646cff';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '#333';
+              }}
             />
             {searchQuery && (
-              <div className="mt-2 text-[13px] text-gray-400">
+              <div
+                style={{
+                  marginTop: '8px',
+                  fontSize: '13px',
+                  color: '#aaa',
+                }}
+              >
                 Searching for: <strong>{searchQuery}</strong>
                 {debouncedQuery !== searchQuery && (
-                  <span className="ml-2 italic">
+                  <span style={{ marginLeft: '8px', fontStyle: 'italic' }}>
                     (typing...)
                   </span>
                 )}
@@ -62,12 +101,22 @@ export function MovieBrowser() {
 
           {/* Empty state */}
           {!isLoading && movies.length === 0 && searchQuery && (
-            <div className="flex flex-col items-center justify-center p-[60px_20px] text-center text-gray-400">
-              <div className="text-5xl mb-4">🔍</div>
-              <h3 className="text-xl mb-2 text-white">
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '60px 20px',
+                textAlign: 'center',
+                color: '#aaa',
+              }}
+            >
+              <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</div>
+              <h3 style={{ fontSize: '20px', marginBottom: '8px', color: '#fff' }}>
                 No movies found
               </h3>
-              <p className="text-sm">
+              <p style={{ fontSize: '14px' }}>
                 Try a different search term or browse popular movies below.
               </p>
             </div>

@@ -29,9 +29,33 @@ export function MovieGrid({
   // Initial loading state with spinner
   if (isLoading) {
     return (
-      <div className="flex flex-col justify-center items-center p-[60px_20px] gap-4">
-        <div className="w-12 h-12 border-4 border-[#333] border-t-[#646cff] rounded-full animate-spin" />
-        <div className="text-base text-gray-400">Loading movies...</div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '60px 20px',
+          gap: '16px',
+        }}
+      >
+        <div
+          style={{
+            width: '48px',
+            height: '48px',
+            border: '4px solid #333',
+            borderTop: '4px solid #646cff',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+          }}
+        />
+        <div style={{ fontSize: '16px', color: '#aaa' }}>Loading movies...</div>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -42,14 +66,24 @@ export function MovieGrid({
       error.message.includes('429') || error.message.includes('rate limit');
 
     return (
-      <div className="flex flex-col justify-center items-center p-[60px_20px] gap-4 text-center">
-        <div className="text-5xl mb-2">⚠️</div>
-        <h3 className="text-xl text-danger-red m-0">
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '60px 20px',
+          gap: '16px',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ fontSize: '48px', marginBottom: '8px' }}>⚠️</div>
+        <h3 style={{ fontSize: '20px', color: '#f44336', margin: 0 }}>
           {isRateLimitError
             ? 'API Rate Limit Exceeded'
             : 'Failed to Load Movies'}
         </h3>
-        <p className="text-sm text-gray-400 max-w-[400px]">
+        <p style={{ fontSize: '14px', color: '#aaa', maxWidth: '400px' }}>
           {isRateLimitError
             ? 'The TMDB API rate limit has been exceeded. Please wait a moment and try again.'
             : error.message || 'An unknown error occurred while loading movies.'}
@@ -57,7 +91,23 @@ export function MovieGrid({
         {refetch && (
           <button
             onClick={() => refetch()}
-            className="px-6 py-2.5 text-sm bg-[#646cff] text-white border-none rounded-md cursor-pointer font-semibold transition-colors hover:bg-[#535bf2]"
+            style={{
+              padding: '10px 24px',
+              fontSize: '14px',
+              backgroundColor: '#646cff',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontWeight: '600',
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#535bf2';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#646cff';
+            }}
           >
             Retry
           </button>
@@ -68,7 +118,16 @@ export function MovieGrid({
 
   if (movies.length === 0) {
     return (
-      <div className="flex justify-center items-center p-10 text-lg opacity-70">
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '40px',
+          fontSize: '18px',
+          opacity: '0.7',
+        }}
+      >
         No movies found.
       </div>
     );
@@ -76,20 +135,44 @@ export function MovieGrid({
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 p-5">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+          gap: '20px',
+          padding: '20px',
+        }}
+      >
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
 
       {/* Infinite scroll sentinel */}
-      <div ref={sentinelRef} className="h-5 my-5" />
+      <div ref={sentinelRef} style={{ height: '20px', margin: '20px 0' }} />
 
       {/* Loading indicator for next page */}
       {isFetchingNextPage && (
-        <div className="flex justify-center items-center p-5 gap-3">
-          <div className="w-5 h-5 border-[3px] border-[#333] border-t-[#646cff] rounded-full animate-spin" />
-          <span className="text-sm text-gray-400">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px',
+            gap: '12px',
+          }}
+        >
+          <div
+            style={{
+              width: '20px',
+              height: '20px',
+              border: '3px solid #333',
+              borderTop: '3px solid #646cff',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+            }}
+          />
+          <span style={{ fontSize: '14px', color: '#aaa' }}>
             Loading more movies...
           </span>
         </div>
@@ -97,7 +180,16 @@ export function MovieGrid({
 
       {/* End of results indicator */}
       {!hasNextPage && movies.length > 0 && (
-        <div className="flex justify-center items-center p-5 text-sm opacity-50">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px',
+            fontSize: '14px',
+            opacity: '0.5',
+          }}
+        >
           No more movies to load
         </div>
       )}
