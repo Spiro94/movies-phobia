@@ -85,15 +85,23 @@ export function MovieCard({ movie }: MovieCardProps) {
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
           {hasNoPhobias ? (
-            <div
-              style={{
-                fontSize: '12px',
-                color: '#ff9800',
-                fontStyle: 'italic',
-              }}
-            >
-              Select phobias to see danger scores
-            </div>
+            tags.length > 0 ? (
+              <DangerBadge
+                score={tags.length}
+                color="#888"
+                label={`${tags.length} ${tags.length === 1 ? 'report' : 'reports'}`}
+              />
+            ) : (
+              <div
+                style={{
+                  fontSize: '12px',
+                  color: '#666',
+                  fontStyle: 'italic',
+                }}
+              >
+                No reports yet
+              </div>
+            )
           ) : (
             <>
               <DangerBadge
