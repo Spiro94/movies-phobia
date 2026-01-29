@@ -87,147 +87,153 @@ export function MovieDetail() {
 
       {movie && (
         <>
-      {/* Back Button */}
-      <div style={{
-        padding: '20px 40px',
-      }}>
-        <Link
-          to="/"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 16px',
-            background: 'rgba(255, 255, 255, 0.1)',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '4px',
-            fontSize: '1rem',
-            transition: 'background 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-          }}
-        >
-          ← Back to Browse
-        </Link>
-      </div>
-
-      {/* Header with backdrop and danger scores */}
-      <MovieDetailHeader key={movie.id} movie={movie} />
-
-      {/* Content Section */}
-      <div
-        className="movie-content"
-        style={{
-          padding: '40px',
-        }}
-      >
-        {/* Overview */}
-        <section style={{ marginBottom: '40px' }}>
-          <h2 style={{
-            fontSize: '1.8rem',
-            marginBottom: '15px',
-            borderBottom: '2px solid #333',
-            paddingBottom: '10px',
+          {/* Back Button */}
+          <div style={{
+            padding: '20px 40px',
           }}>
-            Overview
-          </h2>
-          <p style={{
-            fontSize: '1.1rem',
-            lineHeight: '1.6',
-            opacity: 0.9,
-          }}>
-            {movie.overview || 'No overview available.'}
-          </p>
-        </section>
-
-        {/* Cast */}
-        {movie.credits?.cast && movie.credits.cast.length > 0 && (
-          <section style={{ marginBottom: '40px' }}>
-            <h2 style={{
-              fontSize: '1.8rem',
-              marginBottom: '15px',
-              borderBottom: '2px solid #333',
-              paddingBottom: '10px',
-            }}>
-              Cast
-            </h2>
-            <div
-              className="cast-list"
+            <Link
+              to="/"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                gap: '20px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                fontSize: '1rem',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
               }}
             >
-              {movie.credits.cast.slice(0, 10).map((actor) => (
-                <div
-                  key={actor.id}
-                  className="cast-member"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}
-                >
-                  <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
-                    {actor.name}
-                  </span>
-                  <span
-                    className="character"
-                    style={{
-                      fontSize: '0.9rem',
-                      opacity: 0.7,
-                    }}
-                  >
-                    as {actor.character}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+              ← Back to Browse
+            </Link>
+          </div>
 
-        {/* Tag Scenes Button */}
-        <section style={{ marginBottom: '40px', textAlign: 'center' }}>
-          <button
-            onClick={() => setIsTagModalOpen(true)}
-            className="tag-button"
+          {/* Header with backdrop and danger scores */}
+          <MovieDetailHeader key={movie.id} movie={movie} />
+
+          {/* Content Section */}
+          <div
+            className="movie-content"
             style={{
-              padding: '15px 40px',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              background: '#1976d2',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(25, 118, 210, 0.3)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#1565c0';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#1976d2';
+              padding: '40px',
             }}
           >
-            Tag Scenes
-          </button>
-        </section>
-      </div>
+            {/* Overview */}
+            <section style={{ marginBottom: '40px' }}>
+              <h2 style={{
+                fontSize: '1.8rem',
+                marginBottom: '15px',
+                borderBottom: '2px solid #333',
+                paddingBottom: '10px',
+              }}>
+                Overview
+              </h2>
+              <p style={{
+                fontSize: '1.1rem',
+                lineHeight: '1.6',
+                opacity: 0.9,
+              }}>
+                {movie.overview || 'No overview available.'}
+              </p>
+            </section>
 
-      {/* Scene Tag Modal */}
-      <SceneTagModal
-        movieId={id!}
-        movieRuntime={movie.runtime}
-        isOpen={isTagModalOpen}
-        onClose={() => setIsTagModalOpen(false)}
-      />
-      </>
+            {/* Cast */}
+            {movie.credits?.cast && movie.credits.cast.length > 0 && (
+              <section style={{ marginBottom: '40px' }}>
+                <h2 style={{
+                  fontSize: '1.8rem',
+                  marginBottom: '15px',
+                  borderBottom: '2px solid #333',
+                  paddingBottom: '10px',
+                }}>
+                  Cast
+                </h2>
+                <div
+                  className="cast-list"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                    gap: '20px',
+                  }}
+                >
+                  {movie.credits.cast.slice(0, 10).map((actor) => (
+                    <div
+                      key={actor.id}
+                      className="cast-member"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '5px',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+                        {actor.name}
+                      </span>
+                      <span
+                        className="character"
+                        style={{
+                          fontSize: '0.9rem',
+                          opacity: 0.7,
+                        }}
+                      >
+                        as {actor.character}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Tag Scenes Button */}
+            <section style={{ marginBottom: '40px', textAlign: 'center' }}>
+              <button
+                onClick={() => {
+                  console.log('[MovieDetail] Tag Scenes button clicked');
+                  console.log('[MovieDetail] Movie ID:', id);
+                  console.log('[MovieDetail] Movie runtime:', movie.runtime);
+                  console.log('[MovieDetail] Setting isTagModalOpen to true');
+                  setIsTagModalOpen(true);
+                }}
+                className="tag-button"
+                style={{
+                  padding: '15px 40px',
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  background: '#1976d2',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(25, 118, 210, 0.3)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#1565c0';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#1976d2';
+                }}
+              >
+                Tag Scenes
+              </button>
+            </section>
+          </div>
+
+          {/* Scene Tag Modal */}
+          <SceneTagModal
+            movieId={id!}
+            movieRuntime={movie.runtime}
+            isOpen={isTagModalOpen}
+            onClose={() => setIsTagModalOpen(false)}
+          />
+        </>
       )}
     </div>
   );

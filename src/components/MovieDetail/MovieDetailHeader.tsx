@@ -44,12 +44,12 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
         position: 'absolute',
         inset: 0,
         background: 'rgba(0, 0, 0, 0.7)',
+        zIndex: 0,
       }} />
 
       {/* Content */}
       <div style={{
         position: 'relative',
-        zIndex: 1,
         display: 'flex',
         flexDirection: 'row',
         gap: '30px',
