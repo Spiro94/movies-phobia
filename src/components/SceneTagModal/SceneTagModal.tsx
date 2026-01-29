@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+import { Dialog, DialogPanel } from '@headlessui/react';
 import { useSceneTags } from '../../hooks/useSceneTags';
 import { TagForm } from './TagForm';
 import { TimelineTags } from './TimelineTags';
@@ -15,52 +15,15 @@ export function SceneTagModal({ movieId, movieRuntime, isOpen, onClose }: SceneT
   const { tags, addTag, removeTag } = useSceneTags(movieId);
   const [activeTab, setActiveTab] = useState<'view' | 'add'>('view');
 
-  console.log('[SceneTagModal] Rendering with props:', { movieId, movieRuntime, isOpen });
-  console.log('[SceneTagModal] Tags loaded:', tags.length);
-
-  if (!isOpen) {
-    console.log('[SceneTagModal] Modal is closed, not rendering Dialog');
-    return null;
-  }
-
-  console.log('[SceneTagModal] Modal is open, rendering Dialog');
-
   return (
-    <Dialog open={isOpen} onClose={onClose} style={{ position: 'relative', zIndex: 50 }}>
+    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       {/* Backdrop */}
-      <DialogBackdrop
-        style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        }}
-      />
+      <div className="fixed inset-0 bg-black/80" aria-hidden="true" />
 
       {/* Modal Panel Container */}
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        overflowY: 'auto',
-        zIndex: 10,
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          minHeight: '100%',
-          padding: '80px 16px 16px 16px',
-        }}>
-          <DialogPanel style={{
-            position: 'relative',
-            background: '#1a1a1a',
-            borderRadius: '8px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-            maxWidth: '672px',
-            width: '100%',
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            color: 'white',
-          }}>
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex items-start justify-center min-h-full p-4 pt-20">
+          <DialogPanel className="relative bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto text-white" style={{ background: '#1a1a1a' }}>
             {/* Header */}
             <div style={{
               display: 'flex',
