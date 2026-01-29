@@ -32,10 +32,19 @@ export function PhobiaSelector({
   const selectedCount = selectedPhobias.length;
 
   return (
-    <div className="w-full">
+    <div style={{ width: '100%' }}>
       {/* Header with count and clear button */}
-      <div className="flex justify-between items-center mb-4 pb-3 border-b border-app-border">
-        <div className="text-sm text-gray-400">
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '16px',
+          paddingBottom: '12px',
+          borderBottom: '1px solid #333',
+        }}
+      >
+        <div style={{ fontSize: '14px', color: '#aaa' }}>
           {selectedCount === 0
             ? 'No phobias selected'
             : `${selectedCount} phobia${selectedCount === 1 ? '' : 's'} selected`}
@@ -43,7 +52,24 @@ export function PhobiaSelector({
         {selectedCount > 0 && (
           <button
             onClick={onClear}
-            className="px-3 py-1 text-xs bg-transparent text-danger-yellow border border-danger-yellow rounded cursor-pointer transition-all hover:bg-danger-yellow hover:text-black"
+            style={{
+              padding: '4px 12px',
+              fontSize: '12px',
+              backgroundColor: 'transparent',
+              color: '#ff9800',
+              border: '1px solid #ff9800',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#ff9800';
+              e.currentTarget.style.color = '#000';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = '#ff9800';
+            }}
           >
             Clear all
           </button>
@@ -51,34 +77,77 @@ export function PhobiaSelector({
       </div>
 
       {/* Phobias grouped by category */}
-      <div className="flex flex-col gap-6">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {Object.entries(grouped).map(([category, phobias]) => (
           <fieldset
             key={category}
-            className="border border-app-border rounded-lg p-4 m-0"
+            style={{
+              border: '1px solid #333',
+              borderRadius: '8px',
+              padding: '16px',
+              margin: 0,
+            }}
           >
-            <legend className="text-sm font-semibold text-white px-2">
+            <legend
+              style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#fff',
+                padding: '0 8px',
+              }}
+            >
               {categoryNames[category]}
             </legend>
 
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3">
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                gap: '12px',
+              }}
+            >
               {phobias.map((phobia) => (
                 <label
                   key={phobia.id}
-                  className="flex items-start cursor-pointer p-2 rounded transition-colors hover:bg-[#2a2a2a]"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    cursor: 'pointer',
+                    padding: '8px',
+                    borderRadius: '4px',
+                    transition: 'background-color 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#2a2a2a';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
                   <input
                     type="checkbox"
                     checked={selectedPhobias.includes(phobia.id)}
                     onChange={() => onToggle(phobia.id)}
-                    className="mr-2 mt-0.5 cursor-pointer w-4 h-4"
-                    style={{ accentColor: '#646cff' }}
+                    style={{
+                      marginRight: '8px',
+                      marginTop: '2px',
+                      cursor: 'pointer',
+                      width: '16px',
+                      height: '16px',
+                      accentColor: '#646cff',
+                    }}
                   />
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium">
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontSize: '14px', fontWeight: '500' }}>
                       {phobia.name}
                     </span>
-                    <span className="text-xs text-gray-400 mt-0.5">
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        color: '#aaa',
+                        marginTop: '2px',
+                      }}
+                    >
                       {phobia.description}
                     </span>
                   </div>

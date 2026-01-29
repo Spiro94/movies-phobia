@@ -50,11 +50,21 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px',
+    }}>
       {error && (
         <div
           role="alert"
-          className="p-2.5 bg-danger-red text-white rounded text-sm"
+          style={{
+            padding: '10px',
+            background: '#f44336',
+            color: 'white',
+            borderRadius: '4px',
+            fontSize: '0.9rem',
+          }}
         >
           {error}
         </div>
@@ -63,7 +73,11 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
       <div>
         <label
           htmlFor="timestamp"
-          className="block mb-1.5 font-bold"
+          style={{
+            display: 'block',
+            marginBottom: '5px',
+            fontWeight: 'bold',
+          }}
         >
           Timestamp (mm:ss)
         </label>
@@ -73,7 +87,13 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
           placeholder="e.g., 45:30"
           value={timestamp}
           onChange={(e) => setTimestamp(e.target.value)}
-          className="w-full p-2 text-base border border-gray-300 rounded"
+          style={{
+            width: '100%',
+            padding: '8px',
+            fontSize: '1rem',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
           required
         />
       </div>
@@ -81,7 +101,11 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
       <div>
         <label
           htmlFor="phobia"
-          className="block mb-1.5 font-bold"
+          style={{
+            display: 'block',
+            marginBottom: '5px',
+            fontWeight: 'bold',
+          }}
         >
           Phobia Type
         </label>
@@ -89,7 +113,13 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
           id="phobia"
           value={phobiaId}
           onChange={(e) => setPhobiaId(e.target.value)}
-          className="w-full p-2 text-base border border-gray-300 rounded"
+          style={{
+            width: '100%',
+            padding: '8px',
+            fontSize: '1rem',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
           required
         >
           <option value="">Select a phobia...</option>
@@ -104,7 +134,11 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
       <div>
         <label
           htmlFor="intensity"
-          className="block mb-1.5 font-bold"
+          style={{
+            display: 'block',
+            marginBottom: '5px',
+            fontWeight: 'bold',
+          }}
         >
           Intensity: {intensity}/10
         </label>
@@ -115,9 +149,17 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
           max="10"
           value={intensity}
           onChange={(e) => setIntensity(parseInt(e.target.value, 10))}
-          className="w-full"
+          style={{
+            width: '100%',
+          }}
         />
-        <div className="flex justify-between text-[0.85rem] text-gray-500 mt-1.5">
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontSize: '0.85rem',
+          color: '#666',
+          marginTop: '5px',
+        }}>
           <span>Mild</span>
           <span>Moderate</span>
           <span>Severe</span>
@@ -127,7 +169,11 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
       <div>
         <label
           htmlFor="notes"
-          className="block mb-1.5 font-bold"
+          style={{
+            display: 'block',
+            marginBottom: '5px',
+            fontWeight: 'bold',
+          }}
         >
           Notes (optional)
         </label>
@@ -137,13 +183,29 @@ export function TagForm({ movieRuntime, onSubmit }: TagFormProps) {
           onChange={(e) => setNotes(e.target.value)}
           placeholder="Describe what happens in this scene..."
           rows={3}
-          className="w-full p-2 text-base border border-gray-300 rounded resize-y"
+          style={{
+            width: '100%',
+            padding: '8px',
+            fontSize: '1rem',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            resize: 'vertical',
+          }}
         />
       </div>
 
       <button
         type="submit"
-        className="px-6 py-3 text-base font-bold bg-[#1976d2] text-white border-none rounded cursor-pointer"
+        style={{
+          padding: '12px 24px',
+          fontSize: '1rem',
+          fontWeight: 'bold',
+          background: '#1976d2',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
       >
         Add Tag
       </button>

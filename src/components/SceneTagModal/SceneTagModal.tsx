@@ -26,22 +26,63 @@ export function SceneTagModal({ movieId, movieRuntime, isOpen, onClose }: SceneT
   console.log('[SceneTagModal] Modal is open, rendering Dialog');
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+    <Dialog open={isOpen} onClose={onClose} style={{ position: 'relative', zIndex: 50 }}>
       {/* Backdrop */}
-      <DialogBackdrop className="fixed inset-0 bg-black/80" />
+      <DialogBackdrop
+        style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        }}
+      />
 
       {/* Modal Panel Container */}
-      <div className="fixed inset-0 overflow-y-auto z-10">
-        <div className="flex items-start justify-center min-h-full pt-20 px-4 pb-4">
-          <DialogPanel className="relative bg-app-card rounded-lg shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] max-w-[672px] w-full max-h-[90vh] overflow-y-auto text-white">
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        overflowY: 'auto',
+        zIndex: 10,
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          minHeight: '100%',
+          padding: '80px 16px 16px 16px',
+        }}>
+          <DialogPanel style={{
+            position: 'relative',
+            background: '#1a1a1a',
+            borderRadius: '8px',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            maxWidth: '672px',
+            width: '100%',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            color: 'white',
+          }}>
             {/* Header */}
-            <div className="flex justify-between items-center mb-5 p-5 pb-0">
-              <h2 className="text-[1.8rem] font-bold m-0">
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '20px',
+              padding: '20px 20px 0 20px',
+            }}>
+              <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', margin: 0 }}>
                 Scene Tagging
               </h2>
               <button
                 onClick={onClose}
-                className="bg-transparent border-none text-white text-2xl cursor-pointer p-1.5 leading-none"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  cursor: 'pointer',
+                  padding: '5px',
+                  lineHeight: 1,
+                }}
                 aria-label="Close modal"
               >
                 ✕
@@ -49,33 +90,51 @@ export function SceneTagModal({ movieId, movieRuntime, isOpen, onClose }: SceneT
             </div>
 
             {/* Content */}
-            <div className="px-5 pb-5">
+            <div style={{ padding: '0 20px 20px 20px' }}>
               {/* Tabs */}
-              <div className="tabs flex gap-2.5 mb-6 border-b-2 border-white/10">
+              <div
+                className="tabs"
+                style={{
+                  display: 'flex',
+                  gap: '10px',
+                  marginBottom: '25px',
+                  borderBottom: '2px solid rgba(255, 255, 255, 0.1)',
+                }}
+              >
                 <button
                   onClick={() => setActiveTab('view')}
-                  className={`px-5 py-2.5 border-none border-b-2 text-white text-base cursor-pointer -mb-0.5 ${
-                    activeTab === 'view'
-                      ? 'bg-white/10 border-[#1976d2]'
-                      : 'bg-transparent border-transparent'
-                  }`}
+                  style={{
+                    padding: '10px 20px',
+                    background: activeTab === 'view' ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                    border: 'none',
+                    borderBottom: activeTab === 'view' ? '2px solid #1976d2' : '2px solid transparent',
+                    color: 'white',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    marginBottom: '-2px',
+                  }}
                 >
                   View Tags {tags.length > 0 && `(${tags.length})`}
                 </button>
                 <button
                   onClick={() => setActiveTab('add')}
-                  className={`px-5 py-2.5 border-none border-b-2 text-white text-base cursor-pointer -mb-0.5 ${
-                    activeTab === 'add'
-                      ? 'bg-white/10 border-[#1976d2]'
-                      : 'bg-transparent border-transparent'
-                  }`}
+                  style={{
+                    padding: '10px 20px',
+                    background: activeTab === 'add' ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                    border: 'none',
+                    borderBottom: activeTab === 'add' ? '2px solid #1976d2' : '2px solid transparent',
+                    color: 'white',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    marginBottom: '-2px',
+                  }}
                 >
                   Add Tag
                 </button>
               </div>
 
               {/* Tab Content */}
-              <div className="min-h-[300px] mb-6">
+              <div style={{ minHeight: '300px', marginBottom: '25px' }}>
                 {activeTab === 'view' ? (
                   <TimelineTags tags={tags} onRemoveTag={removeTag} />
                 ) : (
@@ -90,10 +149,28 @@ export function SceneTagModal({ movieId, movieRuntime, isOpen, onClose }: SceneT
               </div>
 
               {/* Footer */}
-              <div className="pt-5 border-t-2 border-white/10 text-right">
+              <div style={{
+                paddingTop: '20px',
+                borderTop: '2px solid rgba(255, 255, 255, 0.1)',
+                textAlign: 'right',
+              }}>
                 <button
                   onClick={onClose}
-                  className="px-5 py-2.5 bg-white/10 border border-white/20 rounded text-white text-base cursor-pointer transition-colors hover:bg-white/20"
+                  style={{
+                    padding: '10px 20px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: '4px',
+                    color: 'white',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                  }}
                 >
                   Close
                 </button>

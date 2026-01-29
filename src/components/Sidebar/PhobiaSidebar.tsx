@@ -19,22 +19,67 @@ export function PhobiaSidebar() {
       {/* Mobile toggle button */}
       <button
         onClick={toggleCollapsed}
-        className="mobile-toggle hidden md:hidden fixed top-20 left-4 z-40 px-3 py-2 bg-app-card border border-app-border rounded-md text-white cursor-pointer text-sm font-semibold"
+        style={{
+          display: 'none',
+          position: 'fixed',
+          top: '80px',
+          left: '16px',
+          zIndex: 40,
+          padding: '8px 12px',
+          backgroundColor: '#1a1a1a',
+          border: '1px solid #333',
+          borderRadius: '6px',
+          color: '#fff',
+          cursor: 'pointer',
+          fontSize: '14px',
+          fontWeight: '600',
+        }}
+        className="mobile-toggle"
       >
         {isCollapsed ? 'Show Filters' : 'Hide Filters'}
       </button>
 
       {/* Sidebar */}
       <aside
-        className={`w-[280px] min-w-[280px] sticky top-0 h-screen overflow-y-auto bg-app-card border-r border-app-border p-5 transition-transform duration-300 ease-in-out ${
-          isCollapsed ? 'sidebar-collapsed' : ''
-        }`}
+        style={{
+          width: '280px',
+          minWidth: '280px',
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          overflowY: 'auto',
+          backgroundColor: '#1a1a1a',
+          borderRight: '1px solid #333',
+          padding: '20px',
+          transition: 'transform 0.3s ease',
+        }}
+        className={isCollapsed ? 'sidebar-collapsed' : ''}
       >
-        <div className="mb-5 pb-4 border-b border-app-border">
-          <h2 className="text-lg font-bold m-0 mb-2 text-white">
+        <div
+          style={{
+            marginBottom: '20px',
+            paddingBottom: '16px',
+            borderBottom: '1px solid #333',
+          }}
+        >
+          <h2
+            style={{
+              fontSize: '18px',
+              fontWeight: '700',
+              margin: '0 0 8px 0',
+              color: '#fff',
+            }}
+          >
             Filter by Phobias
           </h2>
-          <p className="text-[13px] text-gray-400 m-0 leading-snug">
+          <p
+            style={{
+              fontSize: '13px',
+              color: '#aaa',
+              margin: 0,
+              lineHeight: '1.4',
+            }}
+          >
             Select or deselect phobias to update danger scores in real-time
           </p>
         </div>

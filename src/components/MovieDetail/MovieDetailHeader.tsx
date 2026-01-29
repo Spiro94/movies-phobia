@@ -29,36 +29,65 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
     : 'Unknown';
 
   return (
-    <div
-      className="detail-header relative min-h-[400px] text-white bg-cover bg-center"
-      style={{
-        backgroundImage: movie.backdrop_path
-          ? `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
-          : 'none',
-      }}
-    >
+    <div className="detail-header" style={{
+      position: 'relative',
+      backgroundImage: movie.backdrop_path
+        ? `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
+        : 'none',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      minHeight: '400px',
+      color: 'white',
+    }}>
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-black/70 z-0" />
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'rgba(0, 0, 0, 0.7)',
+        zIndex: 0,
+      }} />
 
       {/* Content */}
-      <div className="relative flex flex-row gap-8 p-10 max-w-[1200px] mx-auto">
+      <div style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '30px',
+        padding: '40px',
+        maxWidth: '1200px',
+        margin: '0 auto',
+      }}>
         {/* Poster */}
         {movie.poster_path && (
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
-            className="w-[300px] rounded-lg shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+            style={{
+              width: '300px',
+              borderRadius: '8px',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            }}
           />
         )}
 
         {/* Metadata */}
-        <div className="flex-1 flex flex-col gap-5">
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}>
           <div>
-            <h1 className="m-0 mb-2.5 text-[2.5rem]">
+            <h1 style={{ margin: '0 0 10px 0', fontSize: '2.5rem' }}>
               {movie.title}
             </h1>
             {movie.tagline && (
-              <p className="m-0 text-lg italic opacity-90">
+              <p style={{
+                margin: 0,
+                fontSize: '1.1rem',
+                fontStyle: 'italic',
+                opacity: 0.9
+              }}>
                 {movie.tagline}
               </p>
             )}
@@ -66,30 +95,50 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
 
           {/* Danger Scores Section */}
           {selectedPhobias.length > 0 && (
-            <div className="bg-black/40 p-5 rounded-lg">
-              <div className="mb-4">
-                <h3 className="m-0 mb-2.5 text-xl">
+            <div style={{
+              background: 'rgba(0, 0, 0, 0.4)',
+              padding: '20px',
+              borderRadius: '8px',
+            }}>
+              <div style={{ marginBottom: '15px' }}>
+                <h3 style={{ margin: '0 0 10px 0', fontSize: '1.2rem' }}>
                   Overall Danger Score
                 </h3>
-                <div
-                  className="inline-block px-5 py-2.5 rounded-lg text-2xl font-bold text-white"
-                  style={{ backgroundColor: overallColor }}
-                >
+                <div style={{
+                  display: 'inline-block',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  fontSize: '1.5rem',
+                  fontWeight: 'bold',
+                  backgroundColor: overallColor,
+                  color: 'white',
+                }}>
                   {maxScore}/100
                 </div>
               </div>
 
-              <h4 className="m-0 mb-2.5 text-base">
+              <h4 style={{ margin: '0 0 10px 0', fontSize: '1rem' }}>
                 Phobia-Specific Scores
               </h4>
-              <div className="flex flex-wrap gap-2.5">
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '10px',
+              }}>
                 {selectedPhobias.map(phobiaId => {
                   const phobia = getPhobiaById(phobiaId);
                   const score = scores.byPhobia[phobiaId] || 0;
                   return (
                     <div
                       key={phobiaId}
-                      className="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-md"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        padding: '8px 12px',
+                        borderRadius: '6px',
+                      }}
                     >
                       <span>{phobia?.name || phobiaId}</span>
                       <DangerBadge
@@ -105,7 +154,12 @@ export function MovieDetailHeader({ movie }: MovieDetailHeaderProps) {
           )}
 
           {/* Movie Metadata */}
-          <div className="flex gap-5 text-base flex-wrap">
+          <div style={{
+            display: 'flex',
+            gap: '20px',
+            fontSize: '1rem',
+            flexWrap: 'wrap',
+          }}>
             {movie.runtime && (
               <div>
                 <strong>Runtime:</strong> {formatRuntime(movie.runtime)}

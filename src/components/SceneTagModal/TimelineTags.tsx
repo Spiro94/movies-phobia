@@ -21,11 +21,18 @@ export function TimelineTags({ tags, onRemoveTag }: TimelineTagsProps) {
 
   if (tags.length === 0) {
     return (
-      <div className="empty-state text-center p-[60px_20px] text-gray-500">
-        <p className="text-lg mb-2.5">
+      <div
+        className="empty-state"
+        style={{
+          textAlign: 'center',
+          padding: '60px 20px',
+          color: '#666',
+        }}
+      >
+        <p style={{ fontSize: '1.1rem', marginBottom: '10px' }}>
           No tags yet. Be the first to tag a scene!
         </p>
-        <p className="text-sm">
+        <p style={{ fontSize: '0.9rem' }}>
           Help others by tagging scenes with specific phobias and intensity levels.
         </p>
       </div>
@@ -35,27 +42,43 @@ export function TimelineTags({ tags, onRemoveTag }: TimelineTagsProps) {
   return (
     <div>
       {/* Timeline Overview */}
-      <section className="mb-8">
-        <h3 className="text-xl mb-4 border-b-2 border-white/10 pb-2">
+      <section style={{ marginBottom: '30px' }}>
+        <h3 style={{
+          fontSize: '1.3rem',
+          marginBottom: '15px',
+          borderBottom: '2px solid rgba(255, 255, 255, 0.1)',
+          paddingBottom: '8px',
+        }}>
           Timeline Overview
         </h3>
 
         {/* Overall Intensity Statistics */}
-        <div className="p-4 bg-white/5 rounded mb-4 flex gap-5 justify-center">
-          <div className="text-center">
-            <div className="text-[0.85rem] opacity-70 mb-1.5">
+        <div style={{
+          padding: '15px',
+          background: 'rgba(255, 255, 255, 0.05)',
+          borderRadius: '4px',
+          marginBottom: '15px',
+          display: 'flex',
+          gap: '20px',
+          justifyContent: 'center',
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '5px' }}>
               Maximum Intensity
             </div>
-            <div className="text-2xl font-bold">
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
               {maxIntensity}/10
             </div>
           </div>
-          <div className="w-px bg-white/20" />
-          <div className="text-center">
-            <div className="text-[0.85rem] opacity-70 mb-1.5">
+          <div style={{
+            width: '1px',
+            background: 'rgba(255, 255, 255, 0.2)'
+          }} />
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '5px' }}>
               Average Intensity
             </div>
-            <div className="text-2xl font-bold">
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
               {averageIntensity.toFixed(1)}/10
             </div>
           </div>
@@ -68,27 +91,68 @@ export function TimelineTags({ tags, onRemoveTag }: TimelineTagsProps) {
       <section>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full text-left p-3 bg-white/5 border border-white/10 rounded text-white text-lg cursor-pointer flex justify-between items-center"
+          style={{
+            width: '100%',
+            textAlign: 'left',
+            padding: '12px',
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '4px',
+            color: 'white',
+            fontSize: '1.1rem',
+            cursor: 'pointer',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
         >
           <span>Individual Tags ({tags.length})</span>
           <span>{isExpanded ? '▲' : '▼'}</span>
         </button>
 
         {isExpanded && (
-          <div className="individual-tags mt-4 flex flex-col gap-2.5">
+          <div
+            className="individual-tags"
+            style={{
+              marginTop: '15px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+            }}
+          >
             {tags.map((tag, idx) => {
               const phobia = getPhobiaById(tag.phobiaId);
               return (
                 <div
                   key={idx}
-                  className="tag-item p-4 bg-white/[0.03] border border-white/10 rounded flex flex-col gap-2"
+                  className="tag-item"
+                  style={{
+                    padding: '15px',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                  }}
                 >
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <div className="text-base font-bold mb-1.5">
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                  }}>
+                    <div style={{ flex: 1 }}>
+                      <div style={{
+                        fontSize: '1rem',
+                        fontWeight: 'bold',
+                        marginBottom: '5px',
+                      }}>
                         {formatTimestamp(tag.timestamp)} - {phobia?.name || 'Unknown Phobia'}
                       </div>
-                      <div className="text-sm opacity-80">
+                      <div style={{
+                        fontSize: '0.9rem',
+                        opacity: 0.8,
+                      }}>
                         Intensity: {tag.intensity}/10
                         {' • '}
                         {tag.count} user{tag.count > 1 ? 's' : ''} tagged this
@@ -96,13 +160,34 @@ export function TimelineTags({ tags, onRemoveTag }: TimelineTagsProps) {
                     </div>
                     <button
                       onClick={() => onRemoveTag(idx)}
-                      className="px-3 py-1.5 bg-danger-red text-white border-none rounded text-[0.85rem] cursor-pointer transition-colors hover:bg-[#d32f2f]"
+                      style={{
+                        padding: '6px 12px',
+                        background: '#f44336',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = '#d32f2f';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = '#f44336';
+                      }}
                     >
                       Delete
                     </button>
                   </div>
                   {tag.notes && (
-                    <div className="text-sm p-2.5 bg-white/5 rounded italic opacity-90">
+                    <div style={{
+                      fontSize: '0.9rem',
+                      padding: '10px',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      borderRadius: '4px',
+                      fontStyle: 'italic',
+                      opacity: 0.9,
+                    }}>
                       "{tag.notes}"
                     </div>
                   )}

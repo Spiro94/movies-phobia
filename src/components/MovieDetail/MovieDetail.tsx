@@ -17,19 +17,41 @@ export function MovieDetail() {
   return (
     <div className="movie-detail">
       {isLoading && (
-        <div className="flex justify-center items-center min-h-[400px] text-xl">
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          fontSize: '1.2rem',
+        }}>
           Loading movie details...
         </div>
       )}
 
       {error && (
-        <div className="flex flex-col justify-center items-center min-h-[400px] gap-5">
-          <div className="text-xl text-danger-red">
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          gap: '20px',
+        }}>
+          <div style={{
+            fontSize: '1.2rem',
+            color: '#f44336',
+          }}>
             Error loading movie: {(error as Error).message}
           </div>
           <Link
             to="/"
-            className="px-5 py-2.5 bg-[#1976d2] text-white no-underline rounded"
+            style={{
+              padding: '10px 20px',
+              background: '#1976d2',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+            }}
           >
             Back to Browse
           </Link>
@@ -37,13 +59,26 @@ export function MovieDetail() {
       )}
 
       {!movie && !isLoading && !error && (
-        <div className="flex flex-col justify-center items-center min-h-[400px] gap-5">
-          <div className="text-xl">
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          gap: '20px',
+        }}>
+          <div style={{ fontSize: '1.2rem' }}>
             Movie not found
           </div>
           <Link
             to="/"
-            className="px-5 py-2.5 bg-[#1976d2] text-white no-underline rounded"
+            style={{
+              padding: '10px 20px',
+              background: '#1976d2',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+            }}
           >
             Back to Browse
           </Link>
@@ -53,10 +88,29 @@ export function MovieDetail() {
       {movie && (
         <>
           {/* Back Button */}
-          <div className="p-5 px-10">
+          <div style={{
+            padding: '20px 40px',
+          }}>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-white no-underline rounded text-base transition-colors hover:bg-white/20"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                fontSize: '1rem',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+              }}
             >
               ← Back to Browse
             </Link>
@@ -66,33 +120,70 @@ export function MovieDetail() {
           <MovieDetailHeader key={movie.id} movie={movie} />
 
           {/* Content Section */}
-          <div className="movie-content p-10">
+          <div
+            className="movie-content"
+            style={{
+              padding: '40px',
+            }}
+          >
             {/* Overview */}
-            <section className="mb-10">
-              <h2 className="text-[1.8rem] mb-4 border-b-2 border-app-border pb-2.5">
+            <section style={{ marginBottom: '40px' }}>
+              <h2 style={{
+                fontSize: '1.8rem',
+                marginBottom: '15px',
+                borderBottom: '2px solid #333',
+                paddingBottom: '10px',
+              }}>
                 Overview
               </h2>
-              <p className="text-lg leading-relaxed opacity-90">
+              <p style={{
+                fontSize: '1.1rem',
+                lineHeight: '1.6',
+                opacity: 0.9,
+              }}>
                 {movie.overview || 'No overview available.'}
               </p>
             </section>
 
             {/* Cast */}
             {movie.credits?.cast && movie.credits.cast.length > 0 && (
-              <section className="mb-10">
-                <h2 className="text-[1.8rem] mb-4 border-b-2 border-app-border pb-2.5">
+              <section style={{ marginBottom: '40px' }}>
+                <h2 style={{
+                  fontSize: '1.8rem',
+                  marginBottom: '15px',
+                  borderBottom: '2px solid #333',
+                  paddingBottom: '10px',
+                }}>
                   Cast
                 </h2>
-                <div className="cast-list grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5">
+                <div
+                  className="cast-list"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                    gap: '20px',
+                  }}
+                >
                   {movie.credits.cast.slice(0, 10).map((actor) => (
                     <div
                       key={actor.id}
-                      className="cast-member flex flex-col gap-1.5"
+                      className="cast-member"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '5px',
+                      }}
                     >
-                      <span className="font-bold text-base">
+                      <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
                         {actor.name}
                       </span>
-                      <span className="character text-sm opacity-70">
+                      <span
+                        className="character"
+                        style={{
+                          fontSize: '0.9rem',
+                          opacity: 0.7,
+                        }}
+                      >
                         as {actor.character}
                       </span>
                     </div>
@@ -102,7 +193,7 @@ export function MovieDetail() {
             )}
 
             {/* Tag Scenes Button */}
-            <section className="mb-10 text-center">
+            <section style={{ marginBottom: '40px', textAlign: 'center' }}>
               <button
                 onClick={() => {
                   console.log('[MovieDetail] Tag Scenes button clicked');
@@ -111,7 +202,24 @@ export function MovieDetail() {
                   console.log('[MovieDetail] Setting isTagModalOpen to true');
                   setIsTagModalOpen(true);
                 }}
-                className="tag-button px-10 py-4 text-lg font-bold bg-[#1976d2] text-white border-none rounded-md cursor-pointer shadow-[0_2px_8px_rgba(25,118,210,0.3)] transition-colors hover:bg-[#1565c0]"
+                className="tag-button"
+                style={{
+                  padding: '15px 40px',
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  background: '#1976d2',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(25, 118, 210, 0.3)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#1565c0';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#1976d2';
+                }}
               >
                 Tag Scenes
               </button>
