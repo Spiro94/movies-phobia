@@ -3,4 +3,4 @@ export interface DangerScores {
   byPhobia: Record<string, number>;
 }
 
-export type DangerColor = '#4caf50' | '#ff9800' | '#f44336';
+export type DangerColor = '#4caf50' | '#ff9800' | '#f44336' | '#888';
