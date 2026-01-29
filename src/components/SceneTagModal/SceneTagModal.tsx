@@ -20,20 +20,9 @@ export function SceneTagModal({ movieId, movieRuntime, isOpen, onClose }: SceneT
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/80" aria-hidden="true" />
 
-      {/* Full-screen container */}
+      {/* Modal Panel */}
       <div className="fixed inset-0 flex items-start justify-center p-4 pt-20">
-        <Dialog.Panel
-          style={{
-            background: '#1a1a1a',
-            borderRadius: '8px',
-            padding: '30px',
-            maxWidth: '800px',
-            width: '100%',
-            maxHeight: '90vh',
-            overflow: 'auto',
-            color: 'white',
-          }}
-        >
+        <Dialog.Panel className="relative bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-hidden text-white" style={{ background: '#1a1a1a' }}>
           {/* Header */}
           <div style={{
             display: 'flex',
