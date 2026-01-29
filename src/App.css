@@ -1,1 +1,5 @@
-/* Styles moved to Tailwind utility classes */
+.app {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #fff;
+}
