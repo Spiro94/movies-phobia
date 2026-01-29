@@ -13,7 +13,7 @@
 - **Phase:** 1 of 4 — Foundation & Core Features
 - **Status:** COMPLETE ✓ — All 7 Phase 1 plans finished (01-01 through 01-05)
 - **Progress:** 7 of 7 plans complete (100% of Phase 1)
-- **Last activity:** 2026-01-29 — Completed Quick Task #008 (Revert Tailwind Migration)
+- **Last activity:** 2026-01-29 — Completed Quick Task #009 (Fix Movie Display and Filtering)
 - **Verification:** PASSED (2026-01-28) — All 8 must-haves verified against codebase
 
 ---
@@ -52,6 +52,9 @@ Phase 4: Polish & Launch               ░░░░░░░░░░░░ 0%
 | Top-center dialog positioning pattern | Modals use items-start + pt-20 instead of pure center (better UX) | 2026-01-28 |
 | Body without flex centering | Removed Vite's display: flex + place-items: center; root constraint prevented full-width | 2026-01-28 |
 | Inline styles pattern | Reverted Tailwind CSS migration; using inline styles via style prop for all components | 2026-01-29 |
+| Report count visibility without phobia selection | Users see community data availability before selecting phobias; neutral gray badges | 2026-01-29 |
+| Client-side movie filtering by phobias | useMemo with OR logic for instant filtering; no TMDB API impact | 2026-01-29 |
+| Extended DangerColor type for neutral badges | Added #888 (neutral gray) to support non-danger indicators | 2026-01-29 |
 | Model Profile | Budget (Sonnet for writing, Haiku for research/verification) | 2026-01-26 |
 | Workflow Configuration | Research, Plan Checker, and Execution Verifier all enabled | 2026-01-26 |
 
@@ -71,6 +74,7 @@ None yet.
 | 002 | Fix movie detail layout width and dialog positioning | 2026-01-28 | [8130c45](https://github.com/villamizar/movies-phobia/commit/8130c45), [551c4bf](https://github.com/villamizar/movies-phobia/commit/551c4bf) | [002-fix-movie-detail-layout-and-dialog-posit](./quick/002-fix-movie-detail-layout-and-dialog-posit/) |
 | 003 | Fix root body flexbox centering for true full-width layout | 2026-01-28 | [8a68f40](https://github.com/villamizar/movies-phobia/commit/8a68f40) | [003-fix-full-width-layout-and-modal-stacking](./quick/003-fix-full-width-layout-and-modal-stacking/) |
 | 008 | Revert Tailwind CSS migration to restore stable inline styling | 2026-01-29 | [5ad4c03](https://github.com/villamizar/movies-phobia/commit/5ad4c03) → [bedbbe5](https://github.com/villamizar/movies-phobia/commit/bedbbe5) | [008-revert-tailwind-migration](./quick/008-revert-tailwind-migration/) |
+| 009 | Fix movie display and filtering (report counts and phobia-based filtering) | 2026-01-29 | [8f89919](https://github.com/villamizar/movies-phobia/commit/8f89919), [a4e024d](https://github.com/villamizar/movies-phobia/commit/a4e024d) | [009-fix-movie-display-and-filtering](./quick/009-fix-movie-display-and-filtering/) |
 
 ---
 
@@ -83,11 +87,11 @@ None yet.
 
 ## Session Continuity
 
-- **Last session:** 2026-01-29 15:06 — Completed Quick Task #008
-- **Current activity:** 2026-01-29 — Quick task #008: Reverted Tailwind CSS migration
+- **Last session:** 2026-01-29 20:15 — Completed Quick Task #009
+- **Current activity:** 2026-01-29 — Quick task #009: Fixed movie display and filtering
 - **Next action:** Begin Phase 2 (Authentication & Profiles) planning
 - **Resume file:** None
 
 ---
 
-*Last updated: 2026-01-29 15:06*
+*Last updated: 2026-01-29 20:15*
