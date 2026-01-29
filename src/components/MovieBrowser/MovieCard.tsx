@@ -26,72 +26,28 @@ export function MovieCard({ movie }: MovieCardProps) {
   return (
     <Link
       to={`/movie/${movie.id}`}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: '8px',
-        overflow: 'hidden',
-        backgroundColor: '#1a1a1a',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
-        transition: 'transform 0.2s',
-        textDecoration: 'none',
-        color: 'inherit',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-      }}
+      className="flex flex-col rounded-lg overflow-hidden bg-app-card shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-transform hover:-translate-y-1 no-underline text-inherit"
     >
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '2/3' }}>
+      <div className="relative w-full aspect-[2/3]">
         <img
           src={posterUrl}
           alt={movie.title}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
+          className="w-full h-full object-cover"
         />
       </div>
 
-      <div style={{ padding: '12px' }}>
-        <h3
-          style={{
-            margin: '0 0 8px 0',
-            fontSize: '16px',
-            fontWeight: '600',
-            lineHeight: '1.3',
-          }}
-        >
+      <div className="p-3">
+        <h3 className="m-0 mb-2 text-base font-semibold leading-tight">
           {movie.title}
         </h3>
 
-        <p
-          style={{
-            margin: '0 0 12px 0',
-            fontSize: '13px',
-            lineHeight: '1.4',
-            opacity: '0.8',
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}
-        >
+        <p className="m-0 mb-3 text-[13px] leading-snug opacity-80 line-clamp-3">
           {movie.overview || 'No description available.'}
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+        <div className="flex flex-wrap gap-1.5">
           {hasNoPhobias ? (
-            <div
-              style={{
-                fontSize: '12px',
-                color: '#ff9800',
-                fontStyle: 'italic',
-              }}
-            >
+            <div className="text-xs text-danger-yellow italic">
               Select phobias to see danger scores
             </div>
           ) : (
